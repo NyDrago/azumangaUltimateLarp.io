@@ -1,1 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Azumanga Daioh — Fan Shrine</title>
+<meta name="description" content="An unofficial Azumanga Daioh fan page, with every character graded and color-coded like a pop quiz.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Caveat:wght@500;700&family=Nunito:wght@400;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#fbf3df;
+    --paper-line:#cfe0e8;
+    --margin-red:#e15a66;
+    --ink:#232c3d;
+    --ink-soft:#5b6275;
 
+    --tomo:#ff4d5e;       --tomo-light:#ffc7cc;
+    --worst:#ff8a3d;      --worst-light:#ffd9b8;
+    --mid:#e3ab1f;        --mid-light:#ffeab3;
+    --good:#27a663;       --good-light:#bdf0d4;
+    --goated:#3b6fe0;     --goated-light:#cddcff;
+    --osaka:#7c4fe0;      --osaka-light:#e3d6ff;
+    --pink:#ff6fa0;       --pink-light:#ffd6e6;
+
+    --shadow: 0 10px 30px rgba(35,44,59,0.14);
+  }
+/*if youre reading this, piss off and go write your own code. this is made by temperance and ALONE temperance the man made out of pure divine intellect*/
+  *{box-sizing:border-box;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    margin:0;
+    color:var(--ink);
+    font-family:'Nunito', sans-serif;
+    background-color:var(--paper);
+    background-image:
+      repeating-linear-gradient(var(--paper) 0px, var(--paper) 31px, var(--paper-line) 32px);
+    background-attachment:fixed;
+    line-height:1.6;
+  }
+
+  a{ color: inherit; }
+
+  :focus-visible{
+    outline: 3px dashed var(--margin-red);
+    outline-offset: 3px;
+  }
+
+  .page{
+    max-width:880px;
+    margin:0 auto;
+    padding:64px 48px 72px 92px;
+    position:relative;
+  }
+
+  .page::before{
+    content:"";
+    position:absolute;
+    top:0; bottom:0; left:60px;
+    width:2px;
+    background:var(--margin-red);
+    opacity:0.5;
+  }
+
+  .page::after{
+    content:"";
+    position:absolute;
+    top:48px; left:22px;
+    width:14px; height:calc(100% - 96px);
+    background-image:radial-gradient(circle, var(--paper-line) 5.5px, transparent 6px);
+    background-size:14px 64px;
+    background-repeat:repeat-y;
+    opacity:0.8;
+  }
+
+  
+
+  .eyebrow{
+    font-family:'Space Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    margin:0 0 6px;
+  }
+
+  .hl{
+    background-repeat:no-repeat;
+    background-size:100% 0.5em;
+    background-position:0 88%;
+    padding:0 0.1em;
+  }
+  .hl--pink{ background-image: linear-gradient(105deg, transparent 0%, var(--pink-light) 7%, var(--pink-light) 93%, transparent 100%); }
+  .hl--tomo{ background-image: linear-gradient(105deg, transparent 0%, var(--tomo-light) 7%, var(--tomo-light) 93%, transparent 100%); }
+  .hl--osaka{ background-image: linear-gradient(105deg, transparent 0%, var(--osaka-light) 7%, var(--osaka-light) 93%, transparent 100%); }
+  .hl--goated{ background-image: linear-gradient(105deg, transparent 0%, var(--goated-light) 7%, var(--goated-light) 93%, transparent 100%); }
+  .hl--good{ background-image: linear-gradient(105deg, transparent 0%, var(--good-light) 7%, var(--good-light) 93%, transparent 100%); }
+  .hl--mid{ background-image: linear-gradient(105deg, transparent 0%, var(--mid-light) 7%, var(--mid-light) 93%, transparent 100%); }
+  .hl--worst{ background-image: linear-gradient(105deg, transparent 0%, var(--worst-light) 7%, var(--worst-light) 93%, transparent 100%); }
+
+  .reveal{ opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease; }
+  .reveal.in-view{ opacity:1; transform:none; }
+
+
+
+  .doodle{ display:block; margin-bottom:10px; }
+
+  .title{
+    font-family:'Permanent Marker', cursive;
+    font-weight:400;
+    font-size:clamp(2.4rem, 6vw, 4rem);
+    line-height:1.05;
+    margin:0 0 14px;
+    letter-spacing:0.01em;
+  }
+
+  .margin-note{
+    font-family:'Caveat', cursive;
+    font-size:1.55rem;
+    color:var(--margin-red);
+    transform:rotate(-1.5deg);
+    margin:0 0 22px;
+    display:inline-block;
+  }
+
+  .lede{
+    max-width:56ch;
+    font-size:1.05rem;
+    color:var(--ink-soft);
+    margin:0 0 36px;
+  }
+
+  .hero-actions{
+    display:flex;
+    align-items:center;
+    gap:36px;
+    flex-wrap:wrap;
+  }
+
+  .watch-btn{
+    font-family:'Permanent Marker', cursive;
+    font-size:1rem;
+    text-decoration:none;
+    color:var(--ink);
+    background:#fff;
+    border:2px solid var(--ink);
+    border-radius:6px;
+    padding:14px 22px;
+    display:inline-flex;
+    flex-direction:column;
+    gap:2px;
+    box-shadow:4px 4px 0 var(--pink);
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .watch-btn:hover{
+    transform:translate(-2px,-2px) rotate(-1deg);
+    box-shadow:6px 6px 0 var(--pink);
+  }
+  .watch-btn small{
+    font-family:'Caveat', cursive;
+    font-size:0.95rem;
+    color:var(--ink-soft);
+  }
+
+  .poster{
+    position:relative;
+    margin:0;
+    transform:rotate(2deg);
+  }
+  .poster-img{
+    display:block;
+    width:200px;
+    height:auto;
+    border:6px solid #fff;
+    box-shadow:var(--shadow);
+  }
+  .poster::before, .poster::after{
+    content:"";
+    position:absolute;
+    width:46px; height:18px;
+    background:rgba(255,111,160,0.55);
+    top:-10px;
+  }
+  .poster::before{ left:-10px; transform:rotate(-18deg); }
+  .poster::after{ right:-10px; transform:rotate(18deg); }
+  .poster figcaption{
+    font-family:'Caveat', cursive;
+    font-size:1.1rem;
+    text-align:center;
+    margin-top:10px;
+    color:var(--ink-soft);
+  }
+  .poster.img-broken .poster-img{ display:none; }
+  .poster.img-broken::after, .poster.img-broken::before{ display:none; }
+  .poster.img-broken .poster-fallback{
+    display:flex;
+  }
+  .poster-fallback{
+    display:none;
+    width:200px; min-height:220px;
+    border:2px dashed var(--margin-red);
+    border-radius:6px;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:16px;
+    font-family:'Caveat', cursive;
+    font-size:1.2rem;
+    color:var(--ink-soft);
+    background:#fff;
+  }
+
+
+  .spotlight{
+    background:#fff;
+    border-radius:8px;
+    padding:28px 32px;
+    margin:56px 0;
+    box-shadow:var(--shadow);
+    max-width:480px;
+  }
+  .spotlight.tomo{ transform:rotate(-1.2deg); }
+  .spotlight.osaka{ transform:rotate(1deg); margin-left:auto; }
+
+  .spotlight-tag{
+    font-family:'Space Mono', monospace;
+    font-size:0.78rem;
+    letter-spacing:0.04em;
+    color:var(--ink-soft);
+    margin:0 0 8px;
+  }
+  .spotlight h2{
+    font-family:'Permanent Marker', cursive;
+    font-weight:400;
+    font-size:1.9rem;
+    margin:0 0 8px;
+  }
+  .spotlight p.note{
+    font-family:'Caveat', cursive;
+    font-size:1.2rem;
+    color:var(--ink-soft);
+    margin:0;
+  }
+
+
+
+  .ledger{ margin:64px 0; }
+  .ledger h2{
+    font-family:'Permanent Marker', cursive;
+    font-weight:400;
+    font-size:1.8rem;
+    margin:0 0 4px;
+  }
+  .ledger .sub{
+    font-family:'Caveat', cursive;
+    font-size:1.2rem;
+    color:var(--ink-soft);
+    margin:0 0 20px;
+  }
+
+  .table-wrap{
+    overflow-x:auto;
+    background:#fff;
+    border-radius:8px;
+    box-shadow:var(--shadow);
+  }
+
+  table.ledger-table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:420px;
+  }
+  .ledger-table thead th{
+    font-family:'Space Mono', monospace;
+    text-transform:uppercase;
+    font-size:0.7rem;
+    letter-spacing:0.08em;
+    color:var(--ink-soft);
+    text-align:left;
+    padding:14px 18px;
+    border-bottom:2px solid var(--ink);
+  }
+  .ledger-table td, .ledger-table th[scope="row"]{
+    padding:16px 18px;
+    border-bottom:1.5px dashed rgba(35,44,59,0.22);
+    text-align:left;
+    vertical-align:top;
+    font-weight:700;
+    white-space:nowrap;
+  }
+  .ledger-table tr:last-child td, .ledger-table tr:last-child th{ border-bottom:none; }
+  .ledger-table td{ font-weight:400; white-space:normal; }
+
+  .reveal-btn{
+    font-family:'Nunito', sans-serif;
+    font-weight:700;
+    font-size:0.95rem;
+    background:var(--worst-light);
+    border:1.5px solid var(--worst);
+    border-radius:20px;
+    padding:8px 16px;
+    cursor:pointer;
+    color:var(--ink);
+    transition:transform .15s ease;
+  }
+  .reveal-btn:hover{ transform:scale(1.04); }
+  .worst-content[hidden]{ display:none; }
+  .worst-content{ display:block; margin-top:10px; }
+
+  
+
+  .full-cast{ margin:64px 0 40px; }
+  .full-cast h2{
+    font-family:'Permanent Marker', cursive;
+    font-weight:400;
+    font-size:1.8rem;
+    margin:0 0 4px;
+  }
+  .full-cast .sub{
+    font-family:'Caveat', cursive;
+    font-size:1.2rem;
+    color:var(--ink-soft);
+    margin:0 0 22px;
+  }
+
+  .chip-cloud{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px 12px;
+  }
+  .chip{
+    font-size:0.9rem;
+    font-weight:600;
+    background:#fff;
+    border:1px dashed rgba(35,44,59,0.4);
+    border-radius:4px;
+    padding:7px 12px;
+    box-shadow:2px 2px 0 rgba(35,44,59,0.08);
+    transition:transform .15s ease;
+  }
+  .chip:nth-child(3n){ transform:rotate(-1.2deg); }
+  .chip:nth-child(3n+1){ transform:rotate(0.8deg); }
+  .chip:nth-child(3n+2){ transform:rotate(-0.4deg); }
+  .chip:hover{ transform:translateY(-3px) scale(1.04); }
+
+  
+
+  .site-footer{
+    margin-top:72px;
+    padding-top:24px;
+    border-top:1.5px dashed rgba(35,44,59,0.25);
+    font-family:'Caveat', cursive;
+    font-size:1.1rem;
+    color:var(--ink-soft);
+  }
+  .site-footer p{ margin:0 0 4px; }
+
+  @media (max-width:640px){
+    .page{ padding:48px 22px 56px 56px; }
+    .page::before{ left:34px; }
+    .page::after{ left:12px; }
+    .spotlight{ max-width:100%; }
+    .spotlight.osaka{ margin-left:0; }
+    .hero-actions{ flex-direction:column; align-items:flex-start; gap:28px; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation:none !important; transition:none !important; }
+    html{ scroll-behavior:auto; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+
+  <header class="hero">
+    <svg class="doodle" width="120" height="14" viewBox="0 0 120 14" aria-hidden="true">
+      <path d="M2 10 C 20 2, 38 14, 56 6 S 92 2, 118 9" fill="none" stroke="#e15a66" stroke-width="2.5" stroke-linecap="round"/>
+    </svg>
+    <p class="eyebrow">an unofficial, deeply unserious fan shrine</p>
+    <h1 class="title"><span class="hl hl--pink">Azumanga Daioh</span></h1>
+    <p class="margin-note">— the BEST and most PEAK show ever</p>
+    <p class="lede">Six high schoolers and one homeroom teacher who is very much Not Okay coast through three years of almost nothing happening, and somehow it's perfect. This page exists for one reason: to grade everyone with a highlighter, like a pop quiz. (im trying to make this site look profefesnial)</p>
+
+    <div class="hero-actions">
+      <a class="watch-btn" href="https://www.youtube.com/watch?v=cBkyS0MwGlk&list=PL1ylb5IHEn99Diyx1RBSVTwWGccl9dubW" target="_blank" rel="noopener noreferrer">
+        ▶ watch it (with eng sub)
+        <small>so you don't LARP</small>
+      </a>
+
+      <figure class="poster">
+        <img id="posterImg" class="poster-img" src="https://static.wikia.nocookie.net/a7fd6ef6-e98e-40d7-896b-2ad57e23ee6a" alt="Azumanga Daioh poster" loading="lazy">
+        <div class="poster-fallback">poster link looks broken — might need a fresh URL</div>
+        <figcaption>pure peak. no cap.</figcaption>
+      </figure>
+    </div>
+  </header>
+
+  
+  <section class="spotlight tomo">
+    <p class="spotlight-tag">🔴 gets her own highlighter bc shes the GOAT</p>
+    <h2><span class="hl hl--tomo">T*mo Tak*no</span></h2>
+    <p class="note">i think she is idk im larping the show</p>
+  </section>
+
+
+  <section class="spotlight osaka">
+    <p class="spotlight-tag">🟣 the chosen one</p>
+    <h2><span class="hl hl--osaka">Ayumu "Osaka" Kasuga</span></h2>
+    <p class="note">rox told me shes autistic or smth like that</p>
+  </section>
+
+
+  <section class="ledger">
+    <h2>the ledger</h2>
+    <p class="sub">everyone else</p>
+
+    <div class="table-wrap">
+      <table class="ledger-table">
+        <thead>
+          <tr>
+            <th scope="col">tier</th>
+            <th scope="col">name(s)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row"><span class="hl hl--goated">🔵 GOATED</span></th>
+            <td>Kagura, Sakaki, Minamo Kurosawa</td>
+          </tr>
+          <tr>
+            <th scope="row"><span class="hl hl--good">🟢 good</span></th>
+            <td>Koyomi Mizuhara</td>
+          </tr>
+          <tr>
+            <th scope="row"><span class="hl hl--mid">🟡 eh, mid lowkey</span></th>
+            <td>Kaori</td>
+          </tr>
+          <tr>
+            <th scope="row"><span class="hl hl--worst">🟠 worst</span></th>
+            <td>
+              <button class="reveal-btn" id="worstToggle" aria-expanded="false" aria-controls="worstContent">
+                tap to reveal the top 1 worst character ever (dont)
+              </button>
+              <span class="worst-content" id="worstContent" hidden><span class="hl hl--worst">Y*kari Taniz*aki (she looks cool but i need to put smth here)</span></span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+
+  <section class="full-cast">
+    <h2>full cast</h2>
+    <p class="sub">not individually graded yet</p>
+    <div class="chip-cloud">
+      <span class="chip">Chiyo Mihama</span>
+      <span class="chip">Mr. Kimura</span>
+      <span class="chip">Masaaki Ohyama</span>
+      <span class="chip">Girl with twin-braids</span>
+      <span class="chip">Wada</span>
+      <span class="chip">Kaori's Mother</span>
+      <span class="chip">Kimura's Daughter</span>
+      <span class="chip">Goto-sensei</span>
+      <span class="chip">Fujiko Mine</span>
+      <span class="chip">Nakku (Yomi's podcast)</span>
+      <span class="chip">Mitchi (Yomi's podcast)</span>
+      <span class="chip">Maya's Mother</span>
+      <span class="chip">Dr. Ishihara</span>
+      <span class="chip">Principal</span>
+      <span class="chip">Chihiro</span>
+      <span class="chip">Miruchi</span>
+      <span class="chip">Yuka</span>
+      <span class="chip">Kimura's Wife</span>
+      <span class="chip">Eiko</span>
+      <span class="chip">Chiyo-chichi</span>
+      <span class="chip">Kamineko</span>
+      <span class="chip">Mr. Tadakichi</span>
+      <span class="chip">Maya</span>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <p>margin note: fan-made, unofficial, all love to the original creators of azumanga. (coded by temperance and idea by some dude named redstringbeliever
+)</p>
+    <p>made this bc i was bored in a zoom</p>
+  </footer>
+
+</div>
+
+<script>
+  
+  var posterImg = document.getElementById('posterImg');
+  posterImg.addEventListener('error', function () {
+    posterImg.closest('.poster').classList.add('img-broken');
+  }, { once: true });
+
+
+  var worstBtn = document.getElementById('worstToggle');
+  var worstContent = document.getElementById('worstContent');
+  worstBtn.addEventListener('click', function () {
+    var expanded = worstBtn.getAttribute('aria-expanded') === 'true';
+    worstBtn.setAttribute('aria-expanded', String(!expanded));
+    worstContent.hidden = expanded;
+    worstBtn.textContent = expanded
+      ? 'tap to reveal the top 10 worst characters ever (dont)'
+      : 'you asked for it';
+  });
+
+  
+  var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!prefersReducedMotion && 'IntersectionObserver' in window) {
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.spotlight, .ledger, .full-cast').forEach(function (el) {
+      el.classList.add('reveal');
+      observer.observe(el);
+    });
+  }
+</script>
+
+</body>
+</html>
